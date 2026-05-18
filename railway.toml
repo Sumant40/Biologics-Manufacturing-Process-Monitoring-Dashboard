@@ -1,0 +1,7 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt && python src/ingestion/simulate_data.py && python src/ingestion/load_to_sql.py && python src/monitoring/pca_engine.py && python src/monitoring/hotelling_t2.py && python src/monitoring/spe.py && python src/modeling/feature_engineering.py && python src/modeling/train_yield_model.py"
+
+[deploy]
+startCommand = "python src/dashboard/app.py"
+restartPolicyType = "on_failure"
