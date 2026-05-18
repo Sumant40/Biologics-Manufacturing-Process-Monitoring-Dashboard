@@ -1,0 +1,40 @@
+mspc:
+  n_components: 5          # PCA components to retain
+  alpha: 0.05              # Significance level for T² UCL (95% control limit)
+  phase: "phase1"          # phase1 = fit on reference batches; phase2 = monitor new
+
+simulation:
+  n_batches: 80
+  run_duration_days: 14
+  sample_interval_hours: 4
+  n_normal: 60
+  n_marginal: 15
+  n_ooc: 5                 # Out-of-control batches
+  random_seed: 42
+
+modeling:
+  early_run_cutoff_hours: 48
+  cv_folds: 5
+  xgb_params:
+    n_estimators: 200
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+database:
+  path: "data/sql/bioprocess.db"
+
+process_parameters:
+  - pH
+  - DO_pct
+  - temperature_C
+  - agitation_rpm
+  - feed_rate_A_mL_h
+  - feed_rate_B_mL_h
+  - glucose_g_L
+  - lactate_g_L
+  - VCD_e6_mL
+  - viability_pct
+  - titer_mg_L         # Target variable (final day only used for yield label)
